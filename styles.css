@@ -84,8 +84,6 @@ body {
   background-color: #f1d26a;
 }
 
-
-
 .board.x .cell:not(.x):not(.o):hover::before {
   content: "";
   position: absolute;
@@ -119,7 +117,6 @@ body {
   height: calc(var(--mark-size) * 0.8);
   background-color: #f1d26a;
   border: 2px solid black;
-
 }
 
 .board.o .cell:not(.x):not(.o):hover::after {
@@ -131,5 +128,10 @@ body {
   height: calc(var(--mark-size) * 0.55);
   background-color: #f1d26a;
   border: 2px solid black;
+}
 
+.winning-message {
+  display: flex;
+  flex-direction: column;
+  background-color: #f1d26a;
 }
