@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Reenie+Beanie&display=swap');
+
 *,
 *::after,
 *::before {
@@ -130,8 +132,9 @@ body {
   border: 2px solid black;
 }
 
-.winning-message {
-  display: flex;
-  flex-direction: column;
-  background-color: #f1d26a;
+.text {
+  font-family: 'Reenie Beanie', cursive;
+  font-size: 25px;
+  font-weight: bold;
+  margin: 3px;
 }

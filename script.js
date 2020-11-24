@@ -1,5 +1,5 @@
 const cellElements = document.querySelectorAll("[data-cell]");
-const board = document.getElementById("board");
+const text = document.getElementById("text");
 
 cellElements.forEach((cell) => {
   cell.addEventListener("click", handleClick, { once: true });
@@ -7,7 +7,7 @@ cellElements.forEach((cell) => {
 
 document.addEventListener("keydown", handleKeydown);
 
-const WINNING_COMBINATION = [
+const WINNING_COMBINATIONS = [
   [0, 1, 2],
   [3, 4, 5],
   [6, 7, 8],
@@ -18,34 +18,40 @@ const WINNING_COMBINATION = [
   [2, 4, 6],
 ];
 
-const KEYS = [undefined, 6, 7, 8, 3, 4, 5, 0, 1, 2];
+const NUMERICAL_KEYBOARD = [undefined, 6, 7, 8, 3, 4, 5, 0, 1, 2];
 
 const X_CLASS = "x";
 const O_CLASS = "o";
 
 let xTurn = true;
 
-function handleKeydown(e) {
-  key = e.key;
-  console.log(KEYS[key]);
+function handleKeydown(event) {
   const currentClass = xTurn ? X_CLASS : O_CLASS;
+  cell = NUMERICAL_KEYBOARD[event.key];
 
-  if (checkWin(currentClass)) {
-    console.log(`stop game ${currentClass}`);
-    stopGame(xTurn);
-    xTurn = undefined;
-  }
+  if (cell != undefined) {
+    if (isEmpty(cell)) {
+      cellElements[cell].removeEventListener("click", handleClick, {
+        once: true,
+      });
 
-  if (KEYS[key] != undefined) {
-    placeMark(cellElements[KEYS[key]], currentClass);
-    swapTurns(xTurn);
-    setBoardHoverClass();
+      placeMark(cellElements[cell], currentClass);
+
+      if (checkWin(currentClass)) {
+        stopGame(xTurn);
+        xTurn = undefined;
+      }
+
+      swapTurns(xTurn);
+      setBoardHoverClass();
+    }
   }
 }
 
-function handleClick(e) {
-  const cell = e.target;
+function handleClick(event) {
+  const cell = event.target;
   const currentClass = xTurn ? X_CLASS : O_CLASS;
+
   placeMark(cell, currentClass);
 
   if (checkWin(currentClass)) {
@@ -55,6 +61,13 @@ function handleClick(e) {
 
   swapTurns(xTurn);
   setBoardHoverClass();
+}
+
+function isEmpty(key) {
+  return !(
+    cellElements[key].classList.contains("x") ||
+    cellElements[key].classList.contains("o")
+  );
 }
 
 function placeMark(cell, currentClass) {
@@ -87,20 +100,13 @@ function stopGame(xTurn) {
   });
   document.removeEventListener("keydown", handleKeydown);
 
-  xTurn ? console.log("x wins") : console.log("o wins");
+  xTurn ? (text.innerText = "Winner: X") : (text.innerText = "Winner: O");
 }
 
 function checkWin(currentClass) {
-  console.log("///////////////////////////////////");
-  console.log(`searching for ${currentClass}`);
-  console.log("///////////////////////////////////");
-  myBoolean = WINNING_COMBINATION.some((combination) => {
-    console.log(combination);
+  return WINNING_COMBINATIONS.some((combination) => {
     return combination.every((index) => {
-      console.log(cellElements);
       return cellElements[index].classList.contains(currentClass);
     });
   });
-  console.log(myBoolean);
-  return myBoolean;
 }
