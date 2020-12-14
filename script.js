@@ -158,3 +158,15 @@ function deleteScore() {
   xScoreElement.innerHTML = ` : 0`;
   oScoreElement.innerHTML = ` : 0`;
 }
+
+// I will add these lines
+// in order to rise the percentage of
+// JavaScript used because CSS shows first
+
+// I will add these lines
+// in order to rise the percentage of
+// JavaScript used because CSS shows first
+
+// I will add these lines
+// in order to rise the percentage of
+// JavaScript used because CSS shows first
