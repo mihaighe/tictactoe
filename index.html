@@ -4,6 +4,10 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="styles.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css"
+    />
     <script src="script.js" defer></script>
     <title>TicTacToe</title>
   </head>
@@ -18,7 +22,18 @@
       <div class="cell" data-cell></div>
       <div class="cell" data-cell></div>
       <div class="cell" data-cell></div>
-      <div class="text" id="text">TicTacToe</div>
+      <div class="flex">
+        <i class="fas fa-times"></i>
+        <div id="x" class="text"></div>
+      </div>
+      <div class="flex">
+        <i class="fas fa-circle"></i>
+        <div id="o" class="text"></div>
+      </div>
+      <div class="button">
+        <button id="restart" ><i class="fas fa-redo-alt"></i></button>
+        <button id="delete"><i class="fas fa-trash"> </i></button>
+      </div>
     </div>
   </body>
 </html>

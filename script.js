@@ -1,11 +1,7 @@
-const cellElements = document.querySelectorAll("[data-cell]");
-const text = document.getElementById("text");
+const X_CLASS = "x";
+const O_CLASS = "o";
 
-cellElements.forEach((cell) => {
-  cell.addEventListener("click", handleClick, { once: true });
-});
-
-document.addEventListener("keydown", handleKeydown);
+const NUMERICAL_KEYBOARD = [undefined, 6, 7, 8, 3, 4, 5, 0, 1, 2];
 
 const WINNING_COMBINATIONS = [
   [0, 1, 2],
@@ -18,12 +14,50 @@ const WINNING_COMBINATIONS = [
   [2, 4, 6],
 ];
 
-const NUMERICAL_KEYBOARD = [undefined, 6, 7, 8, 3, 4, 5, 0, 1, 2];
+const cellElements = document.querySelectorAll("[data-cell]");
+const xScoreElement = document.getElementById("x");
+const oScoreElement = document.getElementById("o");
 
-const X_CLASS = "x";
-const O_CLASS = "o";
+const restartButton = document.getElementById("restart");
+const deleteButton = document.getElementById("delete");
+
+
+restartButton.addEventListener("click", restartGame);
+deleteButton.addEventListener("click",  deleteScore);
 
 let xTurn = true;
+start();
+
+function start() {
+  xTurn = true;
+
+  xScore = localStorage.getItem("xScore");
+  oScore = localStorage.getItem("oScore");
+
+  xScore == null ? (xScore = 0) : xScore;
+  oScore == null ? (oScore = 0) : oScore;
+
+  xScoreElement.innerHTML = ` : ${xScore}`;
+  oScoreElement.innerHTML = ` : ${oScore}`;
+
+  cellElements.forEach((cell) => {
+    cell.addEventListener("click", handleClick, { once: true });
+    cell.removeAttribute("style");
+  });
+
+  document.addEventListener("keydown", handleKeydown);
+}
+
+function restartGame() {
+  start();
+  board.classList.add(X_CLASS);
+
+  cellElements.forEach((cell) => {
+    cell.classList.remove(X_CLASS);
+    cell.classList.remove(O_CLASS);
+    cell.style.cursor = "pointer";
+  });
+}
 
 function handleKeydown(event) {
   const currentClass = xTurn ? X_CLASS : O_CLASS;
@@ -100,7 +134,13 @@ function stopGame(xTurn) {
   });
   document.removeEventListener("keydown", handleKeydown);
 
-  xTurn ? (text.innerText = "Winner: X") : (text.innerText = "Winner: O");
+  xTurn ? xScore++ : oScore++;
+
+  xScoreElement.innerHTML = ` : ${xScore}`;
+  oScoreElement.innerHTML = ` : ${oScore}`;
+
+  localStorage.setItem("xScore", xScore);
+  localStorage.setItem("oScore", oScore);
 }
 
 function checkWin(currentClass) {
@@ -109,4 +149,12 @@ function checkWin(currentClass) {
       return cellElements[index].classList.contains(currentClass);
     });
   });
+}
+
+function deleteScore() {
+  localStorage.setItem("xScore", 0);
+  localStorage.setItem("oScore", 0);
+
+  xScoreElement.innerHTML = ` : 0`;
+  oScoreElement.innerHTML = ` : 0`;
 }

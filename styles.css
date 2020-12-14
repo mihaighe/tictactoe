@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Reenie+Beanie&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Permanent+Marker&display=swap');
 
 *,
 *::after,
@@ -133,8 +133,34 @@ body {
 }
 
 .text {
-  font-family: 'Reenie Beanie', cursive;
+  font-family: 'Permanent Marker', cursive;
   font-size: 25px;
-  font-weight: bold;
-  margin: 3px;
+  margin-left: 10px;
+}
+
+button {
+  /* margin-top: 4px; */
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 20px;
+  margin-top: 6px;
+}
+
+button:focus {
+  outline: 0;
+}
+
+.flex {
+  display: flex;
+}
+
+.fa-times {
+  margin-top: 6px;
+  font-size: 28px;
+}
+
+.fa-circle {
+  margin-top: 8px;
+  font-size: 22px;
 }
