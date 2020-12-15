@@ -21,9 +21,8 @@ const oScoreElement = document.getElementById("o");
 const restartButton = document.getElementById("restart");
 const deleteButton = document.getElementById("delete");
 
-
 restartButton.addEventListener("click", restartGame);
-deleteButton.addEventListener("click",  deleteScore);
+deleteButton.addEventListener("click", deleteScore);
 
 let xTurn = true;
 start();
@@ -159,14 +158,16 @@ function deleteScore() {
   oScoreElement.innerHTML = ` : 0`;
 }
 
-// I will add these lines
-// in order to rise the percentage of
-// JavaScript used because CSS shows first
+const text = document.getElementById("modal");
+const close = document.getElementById("close");
+const modal_container = document.getElementById("modal_container");
 
-// I will add these lines
-// in order to rise the percentage of
-// JavaScript used because CSS shows first
 
-// I will add these lines
-// in order to rise the percentage of
-// JavaScript used because CSS shows first
+text.innerHTML =
+  "Hi! Just want to remind you that you can play with a friend using " +
+  "numerical pad. <br> The score will be stored on your local machine" +
+  " and have no expiration date. Have fun!";
+
+close.addEventListener("click", () => {
+  modal_container.classList.remove("show");
+});
